@@ -1,0 +1,47 @@
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+    provider             = "mysql"
+    url                  = env("PLANETSCALE_PRISMA_DATABASE_DEV_URL")
+    referentialIntegrity = "prisma"
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  fullname String?
+  username String @unique
+  twitter_id String @unique
+  twitter_id_str String @unique
+  bio String? 
+  url String?
+  profile_image_url String?
+  profile_banner_url String?
+  twitter_oauth_token String?
+  twitter_oauth_token_secret String?
+  posts Post[]
+}
+
+// Maybe need to save tweet too
+// so later can check the thread related tweet
+//  or just last tweet id?
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  slug      String  @unique
+  body   String @db.Text
+  media   Json?
+  tweet_id  String  @unique
+  tweet_id_str String @unique
+  last_tweet_id String // For Thread to check if new tweets has last_tweet_id
+  last_tweet_id_str String
+  published Boolean @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
