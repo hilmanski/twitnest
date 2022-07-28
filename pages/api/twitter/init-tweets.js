@@ -48,7 +48,17 @@ export default async (req, res) => {
             // 1. Separate tweets and threads
             const posts = _generatePosts(filteredTweets)
             // 2. Bulk Insert via Prisma
-            
+            prisma.post.createMany({
+                data: posts,
+                skipDuplicates: true
+            }).then(result => {
+                console.log('Success insert init posts')
+                console.log(result)
+            }).catch(err => {
+                console.log('Error insert init posts')
+                console.log(err)    
+            })
+
             // 3. TODO MUCH LATER. 
             //        CAN YOU DO THE GENERATEPOSTS LOGIC DIRECLTY ON FIRST LOOP?
             //         to save time
@@ -71,13 +81,12 @@ function _generatePosts(filteredTweets) {
 
     filteredTweets.forEach(tweet => {
 
-        console.log(' inspect tweet type ')
-        console.log(tweet)
-        console.log(' ------------ ')
-
         let media = null
         if(tweet.extended_entities) {
             media = tweet.extended_entities?.media
+            
+            // prepare for later embed media customly
+            tweet.full_text = tweet.full_text + '\n' + `[twitnest:media]`
         }
 
         // If current tweet has children
@@ -85,9 +94,6 @@ function _generatePosts(filteredTweets) {
         if(subTweet != undefined) {
             subTweet.full_text = tweet.full_text + '\n' + subTweet.full_text  
             
-            // add if media exists
-            // it's not perfect, since media not sure where to attach.
-            //      media could be multiple images or videos. SO for latter
             if(tweet.extended_entities) {
                 if(subTweet.extended_entities.media){
                     subTweet.extended_entities.media.push(...tweet.extended_entities.media)
@@ -96,7 +102,6 @@ function _generatePosts(filteredTweets) {
                 }
             }
         }
-        // To Test: what about2nd level
 
         // If part of thread -> Insert to temporary container
         if(tweet.in_reply_to_status_id) {
@@ -118,8 +123,8 @@ function _generatePosts(filteredTweets) {
 
         if(!tweet.in_reply_to_status_id && subTweet) {
             tweet.full_text = subTweet.full_text
-            tweet.media = subTweet.media
 
+            media = subTweet.extended_entities?.media
             last_tweet_id = String(subTweet.id)
             last_tweet_id_str = subTweet.id_str
             updated_at = subTweet.created_at
@@ -137,10 +142,10 @@ function _generatePosts(filteredTweets) {
             'last_tweet_id': last_tweet_id,
             'last_tweet_id_str': last_tweet_id_str,
             'published': true,
-            'created_at': tweet.created_at,
-            'updated_at': updated_at,
-            'authorId': tweet.user.id,
-            'media': media
+            'created_at': new Date(tweet.created_at),
+            'updated_at': new Date(updated_at),
+            'authorId': String(tweet.user.id),
+            'media': (media) ? media : undefined,
         })
     })
 

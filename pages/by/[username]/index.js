@@ -1,5 +1,7 @@
-import InitPosts from "../../components/InitPosts"
+import InitPosts from "../../../components/InitPosts"
 import { PrismaClient } from '@prisma/client';
+import Link from 'next/link'
+
 const prisma = new PrismaClient();
 
 const Profile = ({user}) => {
@@ -13,7 +15,10 @@ const Profile = ({user}) => {
             ) : (
             <ul>
                 {user.posts.map(post => (
-                <li key={post.id}>{post.title}</li>
+                <li key={post.id}>
+                     <Link href={`/by/${user.username}/${post.slug}`}>
+                        <a>{post.title}</a></Link>
+                </li>
                 ))}
             </ul>
         )}
@@ -39,10 +44,9 @@ export async function getServerSideProps({params}) {
         console.log(e)
     }
 
-    console.log(user)
     return {
         props: {
-            user
+            user: JSON.parse(JSON.stringify(user)) 
         }
     }
   }

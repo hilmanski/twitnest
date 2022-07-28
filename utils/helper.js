@@ -1,9 +1,10 @@
 // get first 100 without cutting words
 export const makeTitle = (title) => {
-    const maxLength = 100
+    const maxLength = 50
 
     // remove \n
     title = title.replace(/\n/g, ' ')
+    title = title.replace('[twitnest:media]', ' ') // for embed media helper only in body used
 
     // Check if title only 1 word or less than 100
     if(title.split(' ').length == 1 || title.length < maxLength) {
