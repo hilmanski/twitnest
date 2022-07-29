@@ -2,17 +2,18 @@ import { PrismaClient } from '@prisma/client';
 import { useRouter } from 'next/router';
 import { useSession } from "next-auth/react"
 import Navbar from "../../../components/Navbar";
-
+import React, { useState } from 'react';
 
 const prisma = new PrismaClient();
 
 const Post = ({post}) => {
     const router = useRouter();
     const { data: session } = useSession()
-
+    const [onSubmit, setOnSubmit] = useState(false)
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        setOnSubmit(true)
 
         if (!session) {
             return router.push('/')
@@ -38,9 +39,8 @@ const Post = ({post}) => {
         // Send the form data to our forms API on Vercel and get a response.
         const response = await fetch(endpoint, options)
         const result = await response.json()
-        // Redirect to that page
-        //   router.push('/by/'+ data.user.username);
-
+        
+        setOnSubmit(false)
         return router.push('/setting');
     }
 
@@ -89,13 +89,16 @@ const Post = ({post}) => {
                     <textarea  style={style.textarea} id="body" name="body" defaultValue={post.body}></textarea>
                     { 
                         post.body.includes('[twitnest:media]') && (
-                            <p>*Text &apos;[twitnest:media]&apos; in body.. don&apos;t delete it. It&apos;s a placeholder for us
-                            to serve your image/video later. </p>
+                            <p>*Text &apos;[twitnest:media]&apos; in body is a placeholder for us
+                            to serve your image/video later. Don&apos;t delete it.</p>
                         )
                     }
                 </div>
 
-                <button type="submit" className='button mt-20'> Update Post </button>
+                {
+                    onSubmit && <p>Submitting...</p>
+                }
+                <button disabled={onSubmit} type="submit" className='button mt-20'> Update Post </button>
             </form>
         </div>
     )

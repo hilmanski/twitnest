@@ -11,12 +11,16 @@ export default function Setting() {
 
   // Load posts from the database
   useEffect(() => {
+    loadPosts()
+  }, []);
+
+  function loadPosts() {
     fetch('/api/posts/load')
       .then(res => res.json())
       .then(data => {
         setPosts(data.posts)
       })
-  }, []);
+  }
 
   if (status === "loading") {
     return <p>Loading...</p>
@@ -27,16 +31,17 @@ export default function Setting() {
   }
 
   async function fetchNewTweets() {
+    setActionText("Fetching new tweets...")
     const res = await fetch('/api/twitter/init-tweets')
     const data = await res.json()
-    console.log(data)
-    // Give better feedback or redirect
+    loadPosts()
+    setActionText("")
   }
 
   async function handleDelete(event, param){
     event.preventDefault()
     setActionText("Deleting...")
-    const res = await fetch('/api/posts/delete?id=' + param +'&user_email=' + session.user.email)
+    const res = await fetch('/api/posts/delete?id=' + param)
     const data = await res.json()
     
     if(data.success) {
@@ -52,31 +57,39 @@ export default function Setting() {
     <div className="main">
       <Navbar />
       <h1 className="marginless">Setting Page</h1>
-      <h2 className="marginless">Customize your posts</h2>
+      <h2 className="marginless">Customize your posts - {actionText}</h2>
 
       <div className="mt-50">
-      <h3 className="marginless">/ Fetch New Tweet</h3>
-      <p>If you have new tweets after first init. Fetch it here</p>
+        <h3 className="marginless">/ Write New Post</h3>
+        <p>You can create new post and tweet from here</p>
 
-      <button onClick={() => fetchNewTweets()}>Fetch New Tweets</button>
+        <Link href='/posts/create'><a className="button">Write New Post+</a></Link>
       </div>
 
-      <hr />
       <div className="mt-50">
-      <h3>/ Edit Posts {actionText} </h3>
+        <h3 className="marginless">/ Fetch New Tweet</h3>
+        <p>If you have new tweets after first init. Fetch it here</p>
+
+        <button className="button" onClick={() => fetchNewTweets()}>Fetch New Tweets</button>
+      </div>
+
+      <div className="mt-50">
+      <h3>/ Manage Posts  </h3>
       { posts.length > 0 ? ( 
           <div>
             { posts.map(post => (
-              <div key={post.id}>
-                <p>{post.title}
-                  &nbsp;
+              <div className='grid' key={post.id}>
+                <p>{post.title}</p>
+                
+                <div>
                   <Link href={`/posts/edit/${post.slug}`}>
-                        <a className='button is-small'> 🔧 Edit </a>
+                    <a className='button is-small'> 🔧 Edit </a>
                   </Link>
 
                   &nbsp;
                   <a className='button is-small is-danger' href="#" onClick={event => handleDelete(event, post.id)}>🗑 Delete </a>
-                </p>
+                </div>
+                
               </div>
             ))}
           </div>

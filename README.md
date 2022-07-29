@@ -1,4 +1,23 @@
 
+Now:
+Write article (schedule for tomorrow)
+    It's okay to split some of them as standalone article at onebitedev
+
+
+More better design
+    remember UI/UX is important
+    
+Run linter
+    see if anything you can improve
+
+Refactor
+    Can you refactor your prisma query in a function?
+
+Make cool screenshot and better explanation
+    on landing page.
+    and clickable link | profile example |
+    
+
 ## Next step
 
 - Landing page
@@ -14,12 +33,7 @@
 - test new tweet, that continue to a certain thread (no function)
         for this yet. Idea: on fetch -> check db if no parent
         collect all in array if no parent. attach later.
-- Better protection instead of checking email
-    -> idea: add more info to session
-    -> most secure is load user first (check ownership) 
 - (Later) Fetch old
-
-
 
 -- 
 ## Name

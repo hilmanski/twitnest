@@ -1,5 +1,6 @@
 import { getToken } from "next-auth/jwt"
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
+import { getUser } from "../auth/check";
 
 const prisma = new PrismaClient();
 
@@ -9,8 +10,8 @@ export default async (req, res) => {
         secret: process.env.NEXTAUTH_SECRET
     })
 
-    // temporary auth guard. Need stronger way
-    if (token.email !== req.body.user_email) {
+    const user = await getUser(token)
+    if (token.sub !== user.twitter_id_str) {
         return res.status(401).json({
             error: 'Unauthorized'
         })
