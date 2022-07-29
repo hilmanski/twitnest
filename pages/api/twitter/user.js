@@ -24,9 +24,7 @@ export default async (req, res) => {
                         twitter_id: String(results.id)
                     }
                 })
-
-                console.log('checking user..')
-                console.log(user)
+                
                 if(user){
                     return res.json({
                         success: true,

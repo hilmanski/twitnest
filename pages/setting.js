@@ -15,8 +15,10 @@ export default function Setting() {
   useEffect(() => {
     if(session != null && session != undefined) {
       loadPosts()
-    } 
-  }, [session]);
+    } else {
+      router.push('/')
+    }
+  }, []);
 
   function loadPosts() {
     fetch('/api/posts/load')
@@ -57,7 +59,7 @@ export default function Setting() {
     <div className="main">
       <Navbar />
       <h1 className="marginless">Setting Page</h1>
-      <h2 className="marginless">Customize your posts - {actionText}</h2>
+      <h2 className="marginless">You can write new post, fetch the latest, edit or delete.</h2>
 
       <div className="grid">
         <div className="mt-50">
@@ -69,7 +71,7 @@ export default function Setting() {
 
         <div className="mt-50">
           <h3 className="marginless">/ Fetch New Tweet</h3>
-          <p>If you have new tweets after first init. Fetch it here</p>
+          <p>If you have new tweets, you can import it here</p>
 
           <button className="button" onClick={() => fetchNewTweets()}>Fetch New Tweets</button>
         </div>

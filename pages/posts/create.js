@@ -117,12 +117,12 @@ const Post = () => {
                             {tweetList.length !== 1 && 
                                 <button className="mr-10" onClick={() => handleRemoveClick(index)}>Remove</button>}
                             {tweetList.length - 1 === index && 
-                                <button onClick={handleAddClick}>Add Tweet</button>}
+                                <button onClick={handleAddClick}>Add more Tweet</button>}
                         </div>
                     </div>
                   )  
                 })}
-                
+                *Click 	&ldquo;add more Tweet &rdquo;  above to make a thread
                 {
                     onSubmit && <p>Submitting...</p>
                 }

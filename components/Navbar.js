@@ -20,6 +20,9 @@ const style = {
 export default function Navbar(){
     const { data: session } = useSession()
 
+    const username = localStorage.getItem('username')
+    
+
     return (
         <div style={style.navbar}>
             <div className='grid is-mobile'>
@@ -29,21 +32,35 @@ export default function Navbar(){
                 <h1 style={style.h1}>TwitNest</h1>
             </div>
 
+            <div>
+
+
+            {
+                (session && username) &&
+                <>
+                    <Link href={`/by/${username}`}>
+                        <a>Profile</a>
+                    </Link>
+                    &nbsp;
+                </>
+            }
+
             {
                 session ? (
-                    <div>
+                    <>
                     <Link href="/setting">
                         <a> Setting </a>
                     </Link>
                     &nbsp;
                     <button onClick={() => signOut()}>Sign out</button>
-                    </div>
+                    </>
                 ) : (
                     <Link href="/">
                         <a className='link'>Make your Blog</a>
                     </Link>
                 )
             }
+            </div>
         </div>
     )
 }

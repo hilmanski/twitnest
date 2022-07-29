@@ -86,8 +86,6 @@ export async function getServerSideProps({username, params}) {
             author: true,
         },
     });
-
-    console.log(post)
     
     if(!post){
         return {

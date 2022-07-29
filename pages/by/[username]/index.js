@@ -84,7 +84,6 @@ export async function getServerSideProps({params}) {
         console.log(e)
     }
 
-    console.log(user)
     if(!user) {
         return {
             notFound: true

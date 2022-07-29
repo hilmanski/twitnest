@@ -19,13 +19,21 @@ export default function Home() {
   
   // warning it called two times!
   useEffect(() => {
+    
     if(session != null && session != undefined) { 
-      fetchProfile()
-      initPosts()
+      const username = localStorage.getItem('username')
+      if(username) {
+        router.push('/by/' + username)  
+      } else {
+        console.log('fetch profile and post...')
+        fetchProfile()
+        initPosts()
+      }
     } else {
       router.push('/')
     }
   }, []);
+
 
   const fetchProfile = () => {
       // Load User Data from Twitter
@@ -34,6 +42,7 @@ export default function Home() {
       .then(data => {
         if(data.success) {
           if(!data.is_new) {
+              localStorage.setItem('username', data.user.username)
               router.push('/by/'+ data.user.username);
           }
           setUser(data.user)

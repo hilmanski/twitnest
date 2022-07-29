@@ -1,4 +1,6 @@
 
+Go to your profile is hard
+
 Now:
 Write article (schedule for tomorrow)
     It's okay to split some of them as standalone article at onebitedev

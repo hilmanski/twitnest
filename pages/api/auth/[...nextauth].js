@@ -22,13 +22,16 @@ export default NextAuth({
       if (account.oauth_token_secret) {
         token[account.provider].oauth_token_secret = account.oauth_token_secret
       }
-
-      // token.name, .email, .picture, .sub, .iat, .exp
-
-      console.log('result --> ')
-      console.log(token)
+      
       return token
     },
+
+    // async session({ session, token }) {
+      
+
+    //   session.accessToken = token.accessToken
+    //   return session
+    // },
 
     secret: process.env.NEXTAUTH_SECRET,
     // async session({ session, token, user }) {
@@ -36,5 +39,8 @@ export default NextAuth({
     //   session.accessToken = token.accessToken
     //   return session
     // }
-  }
+  },
+
+
+  
 })
