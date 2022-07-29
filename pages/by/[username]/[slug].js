@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Head from 'next/head'
 import { PrismaClient } from '@prisma/client';
 import Link from 'next/link'
 import Image from 'next/image'
@@ -17,8 +18,7 @@ function renderBody(body, media) {
     if (matches) {
         // find all media ids in matches
         console.log(matches)
-        media.reverse();
-
+        media = media.reverse();
         for(let i = 0; i < media.length; i++) {
             body = body.replace(
                 matches[i], 
@@ -39,6 +39,13 @@ const Post = ({post}) => {
     }, []);
 
     return (
+        <div>
+            <Head>
+                <title>{post.title}</title>
+                <meta property="og:title" content={post.title} key="title" />
+                <meta name="description" content={post.snippet} />
+            </Head>
+        
         <div className='main'>
             <Navbar />
 
@@ -61,6 +68,8 @@ const Post = ({post}) => {
                 </p>
                 <p className='marginless'>Posted at: {post.created_at}</p>
             </div>
+
+        </div>
 
         </div>
     )

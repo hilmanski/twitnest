@@ -1,12 +1,10 @@
-## Landing page
-- Elegant and modern design
-- clear feature
-- make unncessary step (click for ex) becaome automatically
-- list all benefits
-- list bad if only tweet (not ur platform) // no control // no nice home // no ads // etc...
-
 
 ## Next step
+
+- Landing page
+    - clear feature
+    - list all benefits
+    - list bad if only rely on twitter (not ur platform) // no control // no nice home // no ads // etc...
 
 - Add SEO in single page (title and snippet next/head)
 - Render Media (check video)
