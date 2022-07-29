@@ -19,7 +19,6 @@ export default function Home() {
   
   // warning it called two times!
   useEffect(() => {
-    
     if(session != null && session != undefined) { 
       const username = localStorage.getItem('username')
       if(username) {
@@ -29,10 +28,8 @@ export default function Home() {
         fetchProfile()
         initPosts()
       }
-    } else {
-      router.push('/')
-    }
-  }, []);
+    } 
+  }, [session]);
 
 
   const fetchProfile = () => {
@@ -63,6 +60,10 @@ export default function Home() {
        setPosts(data.posts)
        setLoadPost(false)
      }).catch(err => console.log(err))
+  }
+
+  if (status === "unauthenticated") {
+    return <p>Access Denied. Login first.</p>
   }
 
   return (

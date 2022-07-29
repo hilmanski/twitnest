@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react"
 import { signIn, signOut } from "next-auth/react"
 import React, { useEffect } from 'react';
 import Logo from '../components/Logo';
+import Link from 'next/link';
 
 
 export default function Home() {
@@ -12,11 +13,11 @@ export default function Home() {
   const { data: session, status } = useSession()
 
   // Redirect when logged In
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push("/status")
-    }
-  }, [status]);
+  // useEffect(() => {
+  //   if (status === "authenticated") {
+  //     router.push("/status")
+  //   }
+  // }, [status]);
 
   return (
     <div className={styles.container}>
@@ -41,12 +42,14 @@ export default function Home() {
         <div className={styles.description}>
         { status === "authenticated" ?
           <>
-            Signed in as {session.user.email} <br />
-            <button onClick={() => signOut()}>Sign out</button>
+            <Link href='/setting'>
+              <a class='button is-small'>Setting</a>
+            </Link> &nbsp;
+            <button class='button is-small' onClick={() => signOut()}>Sign out</button>
           </>
           :
           <>
-            <button className={styles.mainBtn} onClick={() => signIn("twitter")}>Sign in with Twitter</button>
+            <button className={styles.mainBtn} onClick={() => signIn("twitter", { callbackUrl: '/status'} )}>Sign in with Twitter</button>
           </>
         }
         </div>

@@ -13,11 +13,7 @@ export default function Setting() {
 
   // Load posts from the database
   useEffect(() => {
-    if(session != null && session != undefined) {
       loadPosts()
-    } else {
-      router.push('/')
-    }
   }, []);
 
   function loadPosts() {
@@ -30,6 +26,10 @@ export default function Setting() {
 
   if (status === "loading") {
     return <p>Loading...</p>
+  }
+
+  if (status === "unauthenticated") {
+    return <p>Access Denied. Login first.</p>
   }
 
   async function fetchNewTweets() {

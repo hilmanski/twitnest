@@ -1,6 +1,9 @@
 import { useSession, signIn, signOut } from "next-auth/react"
+import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import Logo from "./Logo";
+
+
 
 const style = {
     navbar: {
@@ -19,8 +22,15 @@ const style = {
 
 export default function Navbar(){
     const { data: session } = useSession()
+    const [username, setUsername] = useState('')
 
-    const username = localStorage.getItem('username')
+    // check if localStograge is defined
+    useEffect(() => {
+        if(localStorage.getItem('username')) {
+            setUsername(localStorage.getItem('username'))
+        }
+    }
+    , [])
     
 
     return (
