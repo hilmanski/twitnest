@@ -14,11 +14,12 @@ export default async (req, res) => {
 
     const client = initTwitterClient(token)
     const owner_id = token.sub
+    const max_tweet_to_fetch = 100
 
     client.get("statuses/user_timeline", {
             trim_user: true,
             include_rts: false,
-            count: 50,
+            count: max_tweet_to_fetch,
             tweet_mode: 'extended'
         })
         .then(results => {

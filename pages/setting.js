@@ -61,18 +61,20 @@ export default function Setting() {
       <h1 className="marginless">Setting Page</h1>
       <h2 className="marginless">Customize your posts - {actionText}</h2>
 
-      <div className="mt-50">
-        <h3 className="marginless">/ Write New Post</h3>
-        <p>You can create new post and tweet from here</p>
+      <div className="grid">
+        <div className="mt-50">
+          <h3 className="marginless">/ Write New Post</h3>
+          <p>You can create new post and tweet from here</p>
 
-        <Link href='/posts/create'><a className="button">Write New Post+</a></Link>
-      </div>
+          <Link href='/posts/create'><a className="button">Write New Post+</a></Link>
+        </div>
 
-      <div className="mt-50">
-        <h3 className="marginless">/ Fetch New Tweet</h3>
-        <p>If you have new tweets after first init. Fetch it here</p>
+        <div className="mt-50">
+          <h3 className="marginless">/ Fetch New Tweet</h3>
+          <p>If you have new tweets after first init. Fetch it here</p>
 
-        <button className="button" onClick={() => fetchNewTweets()}>Fetch New Tweets</button>
+          <button className="button" onClick={() => fetchNewTweets()}>Fetch New Tweets</button>
+        </div>
       </div>
 
       <div className="mt-50">
