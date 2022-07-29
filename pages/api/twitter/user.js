@@ -17,50 +17,55 @@ export default async (req, res) => {
 
     return client.get("account/verify_credentials")
         .then(async function(results){
-            try{
-                console.log('trying upsert.. ')
-                const upsertUser = await prisma.user.upsert({
-                    where: {
-                      twitter_id: token.sub
-                    },
-                    update: {
-                        email: token.email,
-                        twitter_oauth_token: token.twitter.oauth_token,
-                        twitter_oauth_token_secret: token.twitter.oauth_token_secret,
-                    },
-                    create: {
-                        email: token.email,
-                        fullname: results.name,
-                        username: results.screen_name,
-                        twitter_id: String(results.id),
-                        twitter_id_str: results.id_str,
-                        bio: results.description,
-                        url: results.url,
-                        profile_image_url: results.profile_image_url_https || '',
-                        profile_banner_url: results.profile_banner_url || '',
-                        twitter_oauth_token: token.twitter.oauth_token,
-                        twitter_oauth_token_secret: token.twitter.oauth_token_secret,
-                    },
-                  })
-                
-                console.log('done ')
-                console.log(upsertUser)
+            try{    
 
-                return res.status(200).json({
-                    user: upsertUser, 
-                    success: true
-                });
+                const user = await prisma.user.findUnique({
+                    where: {
+                        twitter_id: String(results.id)
+                    }
+                })
+
+                console.log('checking user..')
+                console.log(user)
+                if(user){
+                    return res.json({
+                        success: true,
+                        user: user,
+                        is_new: false
+                    })
+                } else {
+                    const newUser = await prisma.user.create({
+                        data: {
+                            email: token.email,
+                            fullname: results.name,
+                            username: results.screen_name,
+                            twitter_id: String(results.id),
+                            twitter_id_str: results.id_str,
+                            bio: results.description,
+                            url: results.url,
+                            profile_image_url: results.profile_image_url_https || '',
+                            profile_banner_url: results.profile_banner_url || '',
+                            twitter_oauth_token: token.twitter.oauth_token,
+                            twitter_oauth_token_secret: token.twitter.oauth_token_secret
+                        }
+                    })
+
+                    return res.json({
+                        success: true,
+                        user: newUser,
+                        is_new: true
+                    })
+                }
             } catch(e) {
                 if (e instanceof Prisma.PrismaClientKnownRequestError) {
                     
                     if (e.code === 'P2002') {
                         // prismate get user by twitter_id
-                        const user = await prisma.user.findOne({
-                            where: {
-                                email: token.email
-                            }
-                        });
-
+                        // const user = await prisma.user.findUnique({
+                        //     where: {
+                        //         email: token.email
+                        //     }
+                        // });
 
                         return res.status(200).json({
                             success: false,

@@ -15,3 +15,20 @@ export const makeTitle = (title) => {
     trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
     return trimmedString
 }
+
+export const makeSnippet = (text) => {
+    const maxLength = 150
+
+    // remove \n
+    text = text.replace(/\n/g, ' ')
+    text = text.replace('[twitnest:media]', ' ') // for embed media helper only in body used
+
+    // Check if text only 1 word or less than 100
+    if(text.split(' ').length == 1 || text.length < maxLength) {
+        return text
+    }
+    
+    let trimmedString = text.substr(0, maxLength);
+    trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
+    return trimmedString
+}

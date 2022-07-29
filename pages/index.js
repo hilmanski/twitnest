@@ -3,29 +3,20 @@ import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css'
 import { useSession } from "next-auth/react"
 import { signIn, signOut } from "next-auth/react"
+import React, { useEffect } from 'react';
+import Logo from '../components/Logo';
+
 
 export default function Home() {
   const router = useRouter();
   const { data: session, status } = useSession()
 
-  async function handleOnClick(e) {
-    e.preventDefault();
-    fetch('/api/twitter/user')
-      .then(res => res.json())
-      .then(data => {
-        if(data.success) {
-          // redirect to profile page
-          router.push('/by/'+ data.user.username);
-        } else {
-          if(data.codeMessage === 'EXISTS') {
-            // redirect to profile page
-            router.push('/by/'+ data.user.username);
-          }
-        }
-
-      })
-      .catch(err => console.log(err))
-  } 
+  // Redirect when logged In
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/status")
+    }
+  }, [status]);
 
   return (
     <div className={styles.container}>
@@ -35,10 +26,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      
+
+      <main className="main">
+        <div style={{textAlign:'center'}}>
+          <Logo width="200" />
+        </div>
+        <br />
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">TwitNest!</a>
+          Welcome to <span style={{color: '#1C9AEF'}}> TwitNest! </span>
         </h1>
+        <h2 className={styles.subtitle}>Make your blog from twitter with one click </h2>
 
         <div className={styles.description}>
         { status === "authenticated" ?
@@ -48,19 +46,14 @@ export default function Home() {
           </>
           :
           <>
-            Not signed in <br />
-            <button onClick={() => signIn("twitter")}>Sign in with Twitter</button>
+            <button className={styles.mainBtn} onClick={() => signIn("twitter")}>Sign in with Twitter</button>
           </>
         }
-        </div>
-
-        <div>
-          <button onClick={handleOnClick}>Check Timeline</button>
         </div>
       </main>
 
       <footer className={styles.footer}>
-        TwitNest-App
+        TwitNest - convert your twitter to blog
       </footer>
     </div>
   )

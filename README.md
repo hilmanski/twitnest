@@ -1,3 +1,32 @@
+## Landing page
+- Elegant and modern design
+- clear feature
+- make unncessary step (click for ex) becaome automatically
+- list all benefits
+- list bad if only tweet (not ur platform) // no control // no nice home // no ads // etc...
+
+
+## Next step
+
+- Add SEO in single page (title and snippet next/head)
+- show setting page when 'owner -> turn owner as function '
+- Pada saat login (harusnya langsung auto fetch data user. No need 'check timeline')
+- Auto import show loading indicator
+- Render Media (check video)
+- Fetch new [done]
+
+## Later
+- test new tweet, that continue to a certain thread (no function)
+        for this yet. Idea: on fetch -> check db if no parent
+        collect all in array if no parent. attach later.
+- Better protection instead of checking email
+    -> idea: add more info to session
+    -> most secure is load user first (check ownership) 
+- (Later) Fetch old
+
+
+
+-- 
 ## Name
 - twitnest
 
@@ -15,14 +44,11 @@ We filter out:
 - Reply ot a tweet that not yours
 - Tweet that starts with mention to other account
 
---
-## Next step
-- Auto import show loading indicator
-- Render Media
-    List every media supported as your feature
-    Plan: change media with [twitnest:media]
-    later when render change accordinglya
+You can edit this tweet! we're allowign to edit your post
+    title or desc. 
 
+## Caveat:
+currently we're fetching only last 50
 
 
 ## Writing
@@ -40,8 +66,3 @@ What you did when you want to change the schema
 
 Read more in BearAPp
 
-## Landing page
-- Elegant and modern design
-- clear feature
-- list all benefits
-- list bad if only tweet (not ur platform) // no control // no nice home // no ads // etc...

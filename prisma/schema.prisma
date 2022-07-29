@@ -23,6 +23,8 @@ model User {
   twitter_oauth_token String?
   twitter_oauth_token_secret String?
   posts Post[]
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
 }
 
 // Maybe need to save tweet too
@@ -32,6 +34,7 @@ model User {
 model Post {
   id        Int     @id @default(autoincrement())
   title     String
+  snippet   String
   slug      String  @unique
   body   String @db.Text
   media   Json?
@@ -42,6 +45,7 @@ model Post {
   published Boolean @default(true)
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
+  deleted_at DateTime?
   author    User    @relation(fields: [authorId], references: [twitter_id])
   authorId  String
 }

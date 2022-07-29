@@ -1,7 +1,7 @@
 import { getToken } from "next-auth/jwt"
 import { initTwitterClient } from "./config"
 import { PrismaClient, Prisma } from '@prisma/client';
-import { makeTitle } from "../../../utils/helper"
+import { makeSnippet, makeTitle } from "../../../utils/helper"
 import slug from 'slug'
 
 const prisma = new PrismaClient();
@@ -85,8 +85,13 @@ function _generatePosts(filteredTweets) {
         if(tweet.extended_entities) {
             media = tweet.extended_entities?.media
             
-            // prepare for later embed media customly
-            tweet.full_text = tweet.full_text + '\n' + `[twitnest:media]`
+            let mediaEmbedCode = ''
+            for (let i = 0; i < media.length; i++) {
+                // prepare for later embed media customly
+                mediaEmbedCode += `[twitnest:media] `
+            }
+
+            tweet.full_text = tweet.full_text + '\n' + mediaEmbedCode
         }
 
         // If current tweet has children
@@ -136,6 +141,7 @@ function _generatePosts(filteredTweets) {
         posts.push({
             'title': _title,
             'slug': slug(_title) + '-' + Date.now(),
+            'snippet': makeSnippet(tweet.full_text),
             'body': tweet.full_text,
             'tweet_id': String(tweet.id),
             'tweet_id_str': tweet.id_str,
