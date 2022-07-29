@@ -106,7 +106,7 @@ export default function Home() {
       {
         (!loadPost && !loadUser) &&
            <div>          
-              <p class='info mt-50'> Your Blog is ready! Didn't believe it? </p>
+              <p className='info mt-50'> Your Blog is ready! Didn&apos;t believe it? </p>
               <Link href={`/by/${user.username}`}>
                 <a className='button'> See your profile</a>
               </Link>

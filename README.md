@@ -9,9 +9,6 @@
 ## Next step
 
 - Add SEO in single page (title and snippet next/head)
-- show setting page when 'owner -> turn owner as function '
-- Pada saat login (harusnya langsung auto fetch data user. No need 'check timeline')
-- Auto import show loading indicator
 - Render Media (check video)
 - Fetch new [done]
 
@@ -41,7 +38,7 @@ Best practice planetscale X prisma: https://www.youtube.com/watch?v=iaHt5_hg44c
 create in readme / homepage:
 We filter out:
 - Retweet
-- Reply ot a tweet that not yours
+- Reply to a tweet that not yours
 - Tweet that starts with mention to other account
 
 You can edit this tweet! we're allowign to edit your post

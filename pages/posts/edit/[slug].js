@@ -71,7 +71,7 @@ const Post = ({post}) => {
         <div className="main">
             <Navbar />
             <form onSubmit={handleSubmit}>
-                <h2>Edit Post: '{post.title}'</h2>
+                <h2>Edit Post: &apos;{post.title}&apos;</h2>
 
                 <div className='mt-50' style={style.wrapper}>
                     <label style={style.label} htmlFor="title">Title</label>   
@@ -89,7 +89,7 @@ const Post = ({post}) => {
                     <textarea  style={style.textarea} id="body" name="body" defaultValue={post.body}></textarea>
                     { 
                         post.body.includes('[twitnest:media]') && (
-                            <p>*Text "[twitnest:media]" in body.. don't delete it. It's a placeholder for us
+                            <p>*Text &apos;[twitnest:media]&apos; in body.. don&apos;t delete it. It&apos;s a placeholder for us
                             to serve your image/video later. </p>
                         )
                     }

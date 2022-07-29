@@ -22,7 +22,7 @@ const Profile = ({user}) => {
 
             <div>
             <p className='marginless'> @{user.username} </p>
-            <p className='marginless'> {user.fullname}'s Blog </p>
+            <p className='marginless'> {user.fullname}&apos;s Blog </p>
             <p className='marginless'> {user.bio} </p>
             </div>
         </div>
