@@ -62,7 +62,7 @@ const Profile = ({user}) => {
 export async function getServerSideProps({params}) {
     const { username } = params;
 
-    let user = {}
+    let user = null
     try {
         user = await prisma.user.findUnique({
             where: {
@@ -82,6 +82,13 @@ export async function getServerSideProps({params}) {
     }
     catch(e) {
         console.log(e)
+    }
+
+    console.log(user)
+    if(!user) {
+        return {
+            notFound: true
+          }
     }
 
     return {

@@ -104,7 +104,7 @@ const Post = ({post}) => {
     )
 }
 
-export async function getServerSideProps({username, params}) {
+export async function getServerSideProps({params}) {
     const { slug } = params;
 
     let post = null
