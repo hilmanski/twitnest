@@ -54,18 +54,19 @@ export default async (req, res) => {
             }).then(result => {
                 console.log('Success insert init posts')
                 console.log(result)
+
+                return res.status(200).json({
+                    success: true,
+                    posts: posts
+                })
             }).catch(err => {
                 console.log('Error insert init posts')
                 console.log(err)    
-            })
 
-            // 3. TODO MUCH LATER. 
-            //        CAN YOU DO THE GENERATEPOSTS LOGIC DIRECLTY ON FIRST LOOP?
-            //         to save time
-
-            return res.status(200).json({
-                success: true,
-                posts: posts
+                return res.status(500).json({
+                    success: true,
+                    message: 'Error insert bulk posts'
+                })
             })
         })
         .catch(error => {
