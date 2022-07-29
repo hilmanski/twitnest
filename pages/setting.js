@@ -15,10 +15,8 @@ export default function Setting() {
   useEffect(() => {
     if(session != null && session != undefined) {
       loadPosts()
-    } else {
-      router.push('/')
-    }
-  }, [status]);
+    } 
+  }, [session]);
 
   function loadPosts() {
     fetch('/api/posts/load')
@@ -100,6 +98,16 @@ export default function Setting() {
           ) : (
               <Loading />
           )
+          }
+
+          { (actionText != '') &&
+            <div id="myModal" className="modal">
+            <div className="modal-content">
+              <span className="close">&times;</span>
+              <h2>Hold on..</h2>
+              <p>{actionText}</p>
+            </div>
+            </div>
           }
       </div>
     </div>
