@@ -23,7 +23,9 @@ export default function Navbar(){
     return (
         <div style={style.navbar}>
             <div className='grid is-mobile'>
-                <Logo width="100" />
+                <Link href='/'>
+                    <a> <Logo width="100" /></a>
+                </Link>
                 <h1 style={style.h1}>TwitNest</h1>
             </div>
 
