@@ -19,12 +19,15 @@ export default function Home() {
   
   // warning it called two times!
   useEffect(() => {
-    fetchProfile()
-    initPosts()
+    if(session != null && session != undefined) { 
+      fetchProfile()
+      initPosts()
+    } else {
+      router.push('/')
+    }
   }, []);
 
   const fetchProfile = () => {
-      console.log('fetch profile...')
       // Load User Data from Twitter
       fetch('/api/twitter/user')
       .then(res => res.json())

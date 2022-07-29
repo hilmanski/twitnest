@@ -8,6 +8,7 @@ export default async (req, res) => {
         req, 
         secret: process.env.NEXTAUTH_SECRET
     })
+    console.log(token)
 
     // prisma load user by token.sub
     const user = await prisma.user.findUnique({

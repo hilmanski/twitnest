@@ -1,18 +1,24 @@
 import { useSession, getSession } from "next-auth/react"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link'
+import { useRouter } from 'next/router';
 import Navbar from "../components/Navbar";
 import Loading from "../components/Loading";
 
 export default function Setting() {
+  const router = useRouter();
   const { data: session, status } = useSession()
   const [posts, setPosts] = useState([]);
   const [actionText, setActionText] = useState("");
 
   // Load posts from the database
   useEffect(() => {
-    loadPosts()
-  }, []);
+    if(session != null && session != undefined) {
+      loadPosts()
+    } else {
+      router.push('/')
+    }
+  }, [status]);
 
   function loadPosts() {
     fetch('/api/posts/load')
@@ -24,10 +30,6 @@ export default function Setting() {
 
   if (status === "loading") {
     return <p>Loading...</p>
-  }
-
-  if (status === "unauthenticated") {
-    return <p>Access Denied</p>
   }
 
   async function fetchNewTweets() {
