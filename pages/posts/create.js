@@ -61,29 +61,6 @@ const Post = () => {
         setTweetList(list);
     };
 
-    const style = {
-        label: {
-            display: 'block',
-            marginBottom: '5px',
-        },
-        wrapper: {
-            display: 'block',
-            marginBottom: '15px',
-        },
-        input: {
-            display: 'block',
-            width: '100%',
-            padding: '5px',
-            fontSize: '1.2rem'
-        },
-        textarea: {
-            display: 'block',
-            width: '100%',
-            padding: '5px',
-            fontSize: '1.2rem'
-        }
-    }
-
     return (
         <div className="main">
             <Navbar />
@@ -91,22 +68,21 @@ const Post = () => {
                 <h2 className='marginless'>Create Post</h2>
                 <p className='marginless'>Post a Tweet/Thread and Blog on one place</p>
 
-                <div className='mt-50' style={style.wrapper}>
-                    <label style={style.label} htmlFor="title">Title</label>   
-                    <input style={style.input} type="text" id="title" name="title" required />
+                <div className="mt-50 wrapper">
+                    <label className="label" htmlFor="title">Title</label>   
+                    <input className="input" type="text" id="title" name="title" required />
                 </div>
 
-                <div style={style.wrapper}>
-                    <label style={style.label} htmlFor="snippet">Snippet (max: 150 chars)</label>   
-                    <input style={style.input} type="text" id="snippet" name="snippet" required />
-                    *Will be used as meta description
+                <div className="wrapper">
+                    <label className="label" htmlFor="snippet">Meta Desciption for SEO (max: 150 chars)</label>   
+                    <input className="input" type="text" id="snippet" name="snippet" required />
                 </div>
 
                 { tweetList.map((data, index) => {
                   return (
-                    <div style={style.wrapper} key={index}>
-                        <label style={style.label} htmlFor="tweet">Body/Tweet (max. 280 each)</label>   
-                        <textarea  style={style.textarea} 
+                    <div className="wrapper" key={index}>
+                        <label className="label" htmlFor="tweet">Body/Tweet (max. 280 each)</label>   
+                        <textarea  className="textarea" 
                                 id="tweet" 
                                 value={data.tweet} 
                                 name="tweet"
@@ -122,7 +98,7 @@ const Post = () => {
                     </div>
                   )  
                 })}
-                *Click 	&ldquo;add more Tweet &rdquo;  above to make a thread
+                <span className='input-info'>*Click &ldquo;add more Tweet &rdquo;  above to make a thread</span>
                 {
                     onSubmit && <p>Submitting...</p>
                 }

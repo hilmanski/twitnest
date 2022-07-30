@@ -44,52 +44,28 @@ const Post = ({post}) => {
         return router.push('/setting');
     }
 
-    const style = {
-        label: {
-            display: 'block',
-            marginBottom: '5px',
-        },
-        wrapper: {
-            display: 'block',
-            marginBottom: '15px',
-        },
-        input: {
-            display: 'block',
-            width: '100%',
-            padding: '5px',
-            fontSize: '1.2rem'
-        },
-        textarea: {
-            display: 'block',
-            width: '100%',
-            padding: '5px',
-            fontSize: '1.2rem'
-        }
-    }
-
     return (
         <div className="main">
             <Navbar />
             <form onSubmit={handleSubmit}>
                 <h2>Edit Post: &apos;{post.title}&apos;</h2>
 
-                <div className='mt-50' style={style.wrapper}>
-                    <label style={style.label} htmlFor="title">Title</label>   
-                    <input style={style.input} type="text" defaultValue={post.title} id="title" name="title" required />
+                <div className="mt-50 wrapper">
+                    <label className="label" htmlFor="title">Title</label>   
+                    <input className="input" type="text" id="title" name="title" defaultValue={post.title} required />
                 </div>
 
-                <div style={style.wrapper}>
-                    <label style={style.label} htmlFor="snippet">Snippet (max: 150 chars)</label>   
-                    <input style={style.input} type="text" defaultValue={post.snippet} id="snippet" name="snippet" required />
-                    *Will be used as meta description
+                <div className="wrapper">
+                    <label className="label" htmlFor="snippet">Meta Desciption for SEO (max: 150 chars)</label>   
+                    <input className="input" defaultValue={post.snippet} type="text" id="snippet" name="snippet" required />
                 </div>
 
-                <div style={style.wrapper}>
-                    <label style={style.label} htmlFor="body">Body</label>   
-                    <textarea  style={style.textarea} id="body" name="body" defaultValue={post.body}></textarea>
+                <div className="wrapper">
+                    <label className="label" htmlFor="body">Body</label>   
+                    <textarea className='textarea' id="body" name="body" defaultValue={post.body}></textarea>
                     { 
                         post.body.includes('[twitnest:media]') && (
-                            <p>*Text &apos;[twitnest:media]&apos; in body is a placeholder for us
+                            <p className='input-info'>*Text &apos;[twitnest:media]&apos; in body is a placeholder for us
                             to serve your image/video later. Don&apos;t delete it.</p>
                         )
                     }

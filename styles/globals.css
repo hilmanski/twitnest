@@ -264,6 +264,30 @@ a {
   cursor: pointer;
 }
 
+.label{
+  display: block;
+  margin-bottom: 5px;
+}
+
+.wrapper{
+  display: block;
+  margin-bottom: 30px;
+}
+
+.input, .textarea{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 1.2rem;
+  border: 0px;
+  border-radius: 10px;
+}
+
+.input-info {
+  font-size: 0.9rem;
+  color: #cccccc;
+}
+
 @media (max-width: 600px) {
   .grid.is-not-mobile {
     width: 100%;

@@ -15,8 +15,8 @@ const Profile = ({user}) => {
                 className="avatar"
                 src={`${user.profile_image_url.replace('normal', '400x400')}`}
                 alt={`Avatar ${user.username}`}
-                width={200}
-                height={200}
+                width={100}
+                height={100}
                 />
                 &nbsp;&nbsp;
 
