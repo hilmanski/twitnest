@@ -84,16 +84,19 @@ function _generatePosts(filteredTweets) {
     filteredTweets.forEach(tweet => {
 
         let media = null
+        let hasMedia = false
         if(tweet.extended_entities) {
-            media = tweet.extended_entities?.media
-            
-            let mediaEmbedCode = ''
-            for (let i = 0; i < media.length; i++) {
-                // prepare for later embed media customly
-                mediaEmbedCode += `[twitnest:media] `
-            }
+            if(tweet.extended_entities.media) {
+                hasMedia = true
+                media = tweet.extended_entities.media   
+                let mediaEmbedCode = ''
+                for (let i = 0; i < media.length; i++) {
+                    // prepare for later embed media customly
+                    mediaEmbedCode += `[twitnest:media] `
+                }
 
-            tweet.full_text = tweet.full_text + '\n' + mediaEmbedCode
+                tweet.full_text = tweet.full_text + '\n' + mediaEmbedCode
+            }
         }
 
         // If current tweet has children
@@ -101,11 +104,13 @@ function _generatePosts(filteredTweets) {
         if(subTweet != undefined) {
             subTweet.full_text = tweet.full_text + '\n' + subTweet.full_text  
             
-            if(tweet.extended_entities) {
-                if(subTweet.extended_entities.media){
-                    subTweet.extended_entities.media.push(...tweet.extended_entities.media)
-                }else{
-                    subTweet['extended_entities']['media'] = tweet.extended_entities.media
+            if(hasMedia) {
+                if(subTweet.extended_entities){
+                    if(subTweet.extended_entities.media){
+                        subTweet.extended_entities.media.push(...tweet.extended_entities.media)
+                    }else{
+                        subTweet['extended_entities']['media'] = tweet.extended_entities.media
+                    }
                 }
             }
         }

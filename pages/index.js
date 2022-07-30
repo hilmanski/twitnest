@@ -43,9 +43,9 @@ export default function Home() {
         { status === "authenticated" ?
           <>
             <Link href='/setting'>
-              <a class='button is-small'>Setting</a>
+              <a className='button is-small'>Setting</a>
             </Link> &nbsp;
-            <button class='button is-small' onClick={() => signOut()}>Sign out</button>
+            <button className='button is-small' onClick={() => signOut()}>Sign out</button>
           </>
           :
           <>

@@ -20,15 +20,13 @@ export default function Home() {
   // warning it called two times!
   useEffect(() => {
     if(session != null && session != undefined) { 
-      const username = localStorage.getItem('username')
-      if(username) {
-        router.push('/by/' + username)  
-      } else {
-        console.log('fetch profile and post...')
         fetchProfile()
         initPosts()
-      }
-    } 
+    }
+
+    if (!loadPost && !loadUser) {
+      router.push('/by/'+ data.user.username);
+    }
   }, [session]);
 
 
@@ -40,7 +38,6 @@ export default function Home() {
         if(data.success) {
           if(!data.is_new) {
               localStorage.setItem('username', data.user.username)
-              router.push('/by/'+ data.user.username);
           }
           setUser(data.user)
           setloadUser(false);
