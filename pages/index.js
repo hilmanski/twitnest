@@ -56,9 +56,9 @@ export default function Home() {
 
 
         <p className='text-center mt-50'>
-          Request any feature? <a className="link" target="_blank" href="https://twitnest.sleekplan.app/"> here </a> 
+          Request any feature? <a className="link"  rel="noreferrer"  target="_blank" href="https://twitnest.sleekplan.app/"> here </a> 
          / 
-         See Twitnest updates <a className="link" target="_blank" href="https://twitnest.sleekplan.app/changelog"> here</a>
+         See Twitnest updates <a className="link"  rel="noreferrer"  target="_blank" href="https://twitnest.sleekplan.app/changelog"> here</a>
         </p>
         </div>
         
@@ -68,9 +68,11 @@ export default function Home() {
 
           <p className='featurelist'> 
             <span className='good'> Your Simple Blog in ONE CLICK </span>
-            <span className='bad'> Without Twitter's Clutter </span>
+            <span className='bad'> Without Twitter&apos;s Clutter </span>
           </p>
-          <Image src="https://i.ibb.co/KKwQfSc/timeline.png"
+          <Image 
+            alt="twitnest features"
+            src="https://i.ibb.co/KKwQfSc/timeline.png"
             width={700}
             height={450}
           />
@@ -79,7 +81,9 @@ export default function Home() {
             <span className='bad'> Reading in Twitter is full of distraction </span>
             <span className='good'> Let your reader &ldquo;read&rdquo; </span>
           </p>
-          <Image src="https://i.ibb.co/XZgs9vV/thread.png"
+          <Image 
+            alt="twitnest features"
+            src="https://i.ibb.co/XZgs9vV/thread.png"
             width={700}
             height={700}
           />
@@ -88,7 +92,9 @@ export default function Home() {
             <span className='bad'> You can&apos;t edit your tweets </span>
             <span className='good'> But you can edit your blog </span>
           </p>
-          <Image src="https://i.ibb.co/C8tTJGw/edit.png"
+          <Image 
+            alt="twitnest features"
+            src="https://i.ibb.co/C8tTJGw/edit.png"
             width={700}
             height={400}
           />
@@ -97,7 +103,9 @@ export default function Home() {
             <span className='bad'> Writing in Twitter is painful? </span>
             <span className='good'> Create new tweets/thread/post in peace </span>
           </p>
-          <Image src="https://i.ibb.co/27cXsKh/createpostandtweet.png"
+          <Image 
+            alt="twitnest features"
+            src="https://i.ibb.co/27cXsKh/createpostandtweet.png"
             width={700}
             height={500}
           />
@@ -119,11 +127,11 @@ export default function Home() {
 
 
         <p className='text-center'>
-          Request any feature? <a className="link" target="_blank" href="https://twitnest.sleekplan.app/"> here</a>
+          Request any feature? <a className="link"  rel="noreferrer" target="_blank" href="https://twitnest.sleekplan.app/"> here</a>
         </p>
 
         <p className='text-center'>
-         See Twitnest updates <a className="link" target="_blank" href="https://twitnest.sleekplan.app/changelog"> here</a>
+         See Twitnest updates <a className="link"  rel="noreferrer" target="_blank" href="https://twitnest.sleekplan.app/changelog"> here</a>
         </p>
         </div>
 
