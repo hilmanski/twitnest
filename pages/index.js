@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css'
 import { useSession } from "next-auth/react"
@@ -49,10 +50,83 @@ export default function Home() {
           </>
           :
           <>
+            <button className={styles.mainBtn} onClick={() => signIn("twitter", { callbackUrl: '/status'} )}>Make Your Blog From Twitter</button>
+          </>
+        }
+
+
+        <p className='text-center mt-50'>
+          Request any feature? <a className="link" target="_blank" href="https://twitnest.sleekplan.app/"> here </a> 
+         / 
+         See Twitnest updates <a className="link" target="_blank" href="https://twitnest.sleekplan.app/changelog"> here</a>
+        </p>
+        </div>
+        
+        <div className='features'>
+          <p className='main-title'>See TweetNest in Action 👇🏼</p>
+          
+
+          <p className='featurelist'> 
+            <span className='good'> Your Simple Blog in ONE CLICK </span>
+            <span className='bad'> Without Twitter's Clutter </span>
+          </p>
+          <Image src="https://i.ibb.co/KKwQfSc/timeline.png"
+            width={700}
+            height={450}
+          />
+
+      <p className='featurelist'> 
+            <span className='bad'> Reading in Twitter is full of distraction </span>
+            <span className='good'> Let your reader &ldquo;read&rdquo; </span>
+          </p>
+          <Image src="https://i.ibb.co/XZgs9vV/thread.png"
+            width={700}
+            height={700}
+          />
+
+        <p className='featurelist'> 
+            <span className='bad'> You can&apos;t edit your tweets </span>
+            <span className='good'> But you can edit your blog </span>
+          </p>
+          <Image src="https://i.ibb.co/C8tTJGw/edit.png"
+            width={700}
+            height={400}
+          />
+
+        <p className='featurelist'> 
+            <span className='bad'> Writing in Twitter is painful? </span>
+            <span className='good'> Create new tweets/thread/post in peace </span>
+          </p>
+          <Image src="https://i.ibb.co/27cXsKh/createpostandtweet.png"
+            width={700}
+            height={500}
+          />
+         </div>
+
+         <div className={styles.description}>
+         { status === "authenticated" ?
+          <>
+            <Link href='/setting'>
+              <a className='button is-small'>Setting</a>
+            </Link> &nbsp;
+            <button className='button is-small' onClick={() => signOut()}>Sign out</button>
+          </>
+          :
+          <>
             <button className={styles.mainBtn} onClick={() => signIn("twitter", { callbackUrl: '/status'} )}>Sign in with Twitter</button>
           </>
         }
+
+
+        <p className='text-center'>
+          Request any feature? <a className="link" target="_blank" href="https://twitnest.sleekplan.app/"> here</a>
+        </p>
+
+        <p className='text-center'>
+         See Twitnest updates <a className="link" target="_blank" href="https://twitnest.sleekplan.app/changelog"> here</a>
+        </p>
         </div>
+
       </main>
 
       <footer className={styles.footer}>

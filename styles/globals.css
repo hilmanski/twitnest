@@ -47,6 +47,10 @@ a {
   justify-content: center;
 }
 
+.main-home {
+  padding-top: 200px;
+}
+
 .link {
   color: #628db9;
 }
@@ -288,7 +292,37 @@ a {
   color: #cccccc;
 }
 
+.features {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.features .main-title{
+  font-size: 2rem;
+  background-color: #7f68ad;
+  width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
+.featurelist{
+  margin-top: 50px;
+}
+
+.featurelist span{
+  display: block;
+  font-size: 1.5rem;
+}
+
+.featurelist .bad {
+  color: #ce6a6f;
+}
+
 @media (max-width: 600px) {
+  .main{
+    padding: 40px;
+  }
   .grid.is-not-mobile {
     width: 100%;
     flex-direction: column;
