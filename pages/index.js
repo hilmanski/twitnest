@@ -138,7 +138,12 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-        TwitNest - convert your twitter to blog
+        <p>TwitNest - convert your twitter to blog</p>
+        <p> Attribute to  
+          <a className='link' href="https://hashnode.com/?source=planetscale_hackathon_announcement" rel="noreferrer" target="_blank"> PlanetScale </a>
+          and 
+          <a className='link'  href="https://hashnode.com/?source=planetscale_hackathon_announcement" rel="noreferrer" target="_blank"> Hashnode </a>
+        </p>
       </footer>
     </div>
   )
