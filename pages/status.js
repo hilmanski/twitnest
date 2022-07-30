@@ -36,9 +36,7 @@ export default function Home() {
       .then(res => res.json())
       .then(data => {
         if(data.success) {
-          if(!data.is_new) {
-              localStorage.setItem('username', data.user.username)
-          }
+          localStorage.setItem('username', data.user.username)
           setUser(data.user)
           setloadUser(false);
         } else {
