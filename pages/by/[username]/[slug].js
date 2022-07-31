@@ -18,12 +18,16 @@ function renderBody(body, media) {
     if (matches) {
         // find all media ids in matches
         console.log(matches)
-        media = media.reverse();
-        for(let i = 0; i < media.length; i++) {
-            body = body.replace(
-                matches[i], 
-                `<img src="${media[i].media_url_https}" alt="image" />`
-                )
+        if (media){
+            media = media.reverse();
+            for(let i = 0; i < media.length; i++) {
+                body = body.replace(
+                    matches[i], 
+                    `<img src="${media[i].media_url_https}" alt="image" />`
+                    )
+            }
+        } else {
+            body = body.replace(/\[twitnest:media\]/g, "<div style='margin-top:10px;'></div>");
         }
     }
 
