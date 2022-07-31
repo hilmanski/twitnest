@@ -126,12 +126,10 @@ export default function Home() {
         }
 
 
-        <p className='text-center'>
-          Request any feature? <a className="link"  rel="noreferrer" target="_blank" href="https://twitnest.sleekplan.app/"> here</a>
-        </p>
-
-        <p className='text-center'>
-         See Twitnest updates <a className="link"  rel="noreferrer" target="_blank" href="https://twitnest.sleekplan.app/changelog"> here</a>
+        <p className='text-center mt-50'>
+          Request any feature? <a className="link"  rel="noreferrer"  target="_blank" href="https://twitnest.sleekplan.app/"> here </a> 
+         / 
+         See Twitnest updates <a className="link"  rel="noreferrer"  target="_blank" href="https://twitnest.sleekplan.app/changelog"> here</a>
         </p>
         </div>
 
