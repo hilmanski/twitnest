@@ -1,12 +1,19 @@
 import { PrismaClient } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link'
+import Head from 'next/head'
 import Navbar from '../../../components/Navbar';
 
 const prisma = new PrismaClient();
 
 const Profile = ({user}) => {
   return (
+    <div>
+    <Head>
+        <title>Micro Blog by {user.username}</title>
+        <meta property="og:title" content={`Micro Blog by ${user.username}`} key="title" />
+        <meta name="description" content={`This is a Micro Blog by ${user.username} from twitter`} />
+    </Head>
     <div className='main'>
         <Navbar />
         
@@ -55,6 +62,7 @@ const Profile = ({user}) => {
                 </ul>
              </div>   
         )}
+    </div>
     </div>
     )
 }
